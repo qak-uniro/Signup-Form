@@ -12,17 +12,17 @@ const validate = (values) => {
   if (!values.lastName) {
     errors.lastName = "Last Name cannot be empty";
   } else if (values.lastName.length > 20) {
-    errors.lastName = "Must be 20 characters or less";
+    errors.lastName = "Must be 25 characters or less";
   }
 
   if (!values.email) {
     errors.email = "Email is required";
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Invalid email address";
+    errors.email = "Invalid Email address";
   }
 
   if (!values.password) {
-    errors.password = "Password is required";
+    errors.password = "Password is Required";
   } else if (values.password.length < 8) {
     errors.password = "Password must not be less than 8 characters";
   }
