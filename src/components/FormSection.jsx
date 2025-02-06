@@ -5,14 +5,14 @@ const validate = (values) => {
   const errors = {};
   if (!values.firstName) {
     errors.firstName = "FirstName cannot be empty";
-  } else if (values.firstName.length > 55) {
+  } else if (values.firstName.length > 25) {
     errors.firstName = "Must be 25 characters or less";
   }
 
   if (!values.lastName) {
     errors.lastName = "LastName cannot be empty";
-  } else if (values.lastName.length > 25) {
-    errors.lastName = "Must be 25 characters or less";
+  } else if (values.lastName.length > 20) {
+    errors.lastName = "Must be 20 characters or less";
   }
 
   if (!values.email) {
