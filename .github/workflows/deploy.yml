@@ -1,38 +1,52 @@
-name: Deploy to Hostinger (Simulated)
+name: Simulate Deployment and Run Tests
 on:
   push:
     branches:
-      - main
+      - main  # Trigger the workflow on pushes to the 'main' branch
 
 jobs:
-  build:
+  deploy_and_test:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout the code from the current repository (where deploy.yml is)
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # Step 2: Set up Node.js (if required for your deployment)
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '20.11.0'
 
+      # Step 3: Install project dependencies (if required for your project)
       - name: Install dependencies
         run: npm install
 
-      - name: Install Angular CLI
-        run: npm install -g @angular/cli
-
-      - name: Build project
-        run: ng build --configuration production
-
-      # Simulate deployment step
-      - name: Simulate Deployment (No real FTP)
+      # Step 4: Simulate the deployment (no real FTP)
+      - name: Simulate Deployment (No FTP)
         run: |
           echo "✅ Simulating Deployment to Hostinger..."
           sleep 5  # Wait for 5 seconds to simulate deployment time
           echo "✅ Deployment simulation completed!"
 
-      - name: Trigger Jenkins Pipeline after Simulated Deployment
+      # Step 5: Clone the Test Script Repository (this assumes you have a separate repo for tests)
+      - name: Checkout Test Scripts Repository
+        uses: actions/checkout@v2
+        with:
+          repository: your-username/testscript-repo  # Replace with your actual test script repository
+          token: ${{ secrets.GITHUB_TOKEN }}  # Ensure your test repo is public or has proper access tokens
+          path: test-scripts  # This will clone the repo in the "test-scripts" folder
+
+      # Step 6: Run your test scripts (adjust this based on how you run the tests)
+      - name: Run Test Scripts
+        run: |
+          cd test-scripts  # Navigate to the folder containing your test scripts
+          # Run the test scripts (assumes you use a test command like 'npm test' or 'ng test')
+          npm install  # Install any dependencies for test scripts if required
+          npm test      # Run your test scripts (replace this with your actual test command)
+
+      # Optional: Trigger Jenkins pipeline (if you want to trigger the Jenkins job after successful tests)
+      - name: Trigger Jenkins Pipeline after Test Scripts
         run: |
           curl -X POST "http://194.233.84.131:8080/job/DevelopmentRepo/build?token=trigger_dev_pipeline"
