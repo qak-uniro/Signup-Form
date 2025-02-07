@@ -5,20 +5,20 @@ const validate = (values) => {
   const errors = {};
   if (!values.firstName) {
     errors.firstName = "FirstName cannot be empty";
-  } else if (values.firstName.length > 25) {
-    errors.firstName = "Must be 25 characters or less";
+  } else if (values.firstName.length > 15) {
+    errors.firstName = "Must be 15 characters or less";
   }
 
   if (!values.lastName) {
     errors.lastName = "LastName cannot be empty";
-  } else if (values.lastName.length > 20) {
-    errors.lastName = "Must be 20 characters or less";
+  } else if (values.lastName.length > 15) {
+    errors.lastName = "Must be 15 characters or less";
   }
 
   if (!values.email) {
-    errors.email = "E-mail is required";
+    errors.email = "Email is required";
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Invalid E-mail address";
+    errors.email = "Invalid Email address";
   }
 
   if (!values.password) {
