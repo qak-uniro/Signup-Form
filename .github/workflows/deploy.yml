@@ -1,0 +1,38 @@
+name: Deploy to Hostinger (Simulated)
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.11.0'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
+
+      - name: Build project
+        run: ng build --configuration production
+
+      # Simulate deployment step
+      - name: Simulate Deployment (No real FTP)
+        run: |
+          echo "✅ Simulating Deployment to Hostinger..."
+          sleep 5  # Wait for 5 seconds to simulate deployment time
+          echo "✅ Deployment simulation completed!"
+
+      - name: Trigger Jenkins Pipeline after Simulated Deployment
+        run: |
+          curl -X POST "http://194.233.84.131:8080/job/DevelopmentRepo/build?token=trigger_dev_pipeline"
