@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git 'https://github.com/qak-uniro/Signup-Form.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'echo "Building the Signup Form application..."'
+            }
+        }
+        stage('Deploy (Simulated)') {
+            steps {
+                script {
+                    echo "✅ Simulating Deployment..."
+                    sleep 5  // Wait for 5 seconds to mimic deployment time
+                    echo "✅ Deployment Simulation Complete!"
+                    
+                    // Simulate a successful deployment
+                    def deploymentSuccess = true  
+
+                    if (deploymentSuccess) {
+                        echo "✅ Deployment was successful. Triggering Test Job..."
+                        build job: 'Test-Script-Repo-Job', wait: false
+                    } else {
+                        error("❌ Deployment failed!")
+                    }
+                }
+            }
+        }
+    }
+}
