@@ -49,4 +49,4 @@ jobs:
       # Optional: Trigger Jenkins pipeline (if you want to trigger the Jenkins job after successful tests)
       - name: Trigger Jenkins Pipeline after Test Scripts
         run: |
-          curl -X POST "http://194.233.84.131:8080/job/DevelopmentRepo/build?token=trigger_dev_pipeline"
+          curl -X POST -u "admin:0ac05ab585304294b58cb390d4fc875e" "http://194.233.84.131:8080/job/DevelopmentRepo/build?token=trigger_dev_pipeline"
